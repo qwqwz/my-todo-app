@@ -1,8 +1,8 @@
 <template>
   <div class="app">
     <h1 class="main-title">My ToDo</h1>
-    <post-form/>
-    <post-list :items="items"/>
+    <post-form />
+    <post-list />
 
   </div>
 </template>
@@ -12,21 +12,13 @@ import PostForm from "@/components/PostForm";
 import PostList from "@/components/PostList";
 
 export default {
-  components: {PostForm, PostList},
-  data() {
-    return {
-      items: [
-        {id: 1, title: 'Hello', status: true},
-        {id: 2, title: 'Hello2', status: true},
-      ]
-    }
-  }
+  components: {PostForm, PostList}
 }
 </script>
 
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap");
 
 body {
   font-family: 'Chakra Petch', sans-serif;
@@ -38,6 +30,13 @@ body {
   box-sizing: border-box;
 }
 
+h4 {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 21px;
+}
+
 #app {
   margin: 24px;
 }
@@ -45,10 +44,7 @@ body {
 .app {
   align-content: center;
   max-width: 820px;
-  background-color: #3B3D47;
-  margin: 24px auto;
-  padding: 32px;
-  border-radius: 18px;
+  margin: 0 auto;
 }
 
 .main-title {

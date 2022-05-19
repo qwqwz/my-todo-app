@@ -1,13 +1,34 @@
 <template>
   <div class="post-form">
-    <input class="main-input" type="text" placeholder="Enter the name...">
-<button class="btn">Create</button>
+    <input v-model="title"
+           class="main-input"
+           type="text" placeholder="Enter the name..."
+           v-on:keyup.enter="addNewTask(title)"
+    >
+    <button @click="addNewTask(title)"
+            class="btn"
+    >Create
+    </button>
   </div>
 </template>
 
 <script>
 export default {
-  name: "PostForm"
+  name: "PostForm",
+  data () {
+    return {
+      title: ''
+    }
+  },
+  methods: {
+    addNewTask(title) {
+      if (this.title.trim() !== '') {
+        this.$store.commit('addNewTask', title);
+        this.$store.getters.turnActive;
+        this.title = '';
+      }
+    }
+  }
 }
 </script>
 
