@@ -6,7 +6,7 @@
   <div class="main_content">
     <ItemCheckbox :isActive="item.isActive"/>
     <div>
-      <div class="create-date">{{ index }} Today 16:09 </div>
+      <div class="create-date">{{ checkDate(item.createDate) }} </div>
       <div class="title"
       >
         <h4>{{ item.title }}</h4>
@@ -54,6 +54,16 @@ export default {
       const active = this.$store.state.tasks[index].isActive;
       this.$store.state.tasks[index].isActive = !active;
       this.$store.getters.turnActive;
+    },
+    checkDate(date) {
+      const arr = date.split(' ');
+      const yesterday = new Date(new Date() - 24*3600*1000)
+      if (arr[0] === new Date().toLocaleDateString()) {
+        return `Today ${arr[1]}`
+      } else if (arr[0] === yesterday.toLocaleDateString()) {
+        return  `Yesterday ${arr[1]}`
+      }
+      return date;
     }
   }
 }
