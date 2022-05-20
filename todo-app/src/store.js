@@ -18,7 +18,7 @@ const store = createStore({
       if (s_tasks.length === 0) {
         return s_tasks.push({id: 1, createDate: currentDate, title: title, isActive: true});
       }
-      s_tasks.push({id: s_tasks[s_tasks.length - 1].id + 1, createDate: currentDate, title:title, isActive: true});
+      s_tasks.push({id: state.tasks.reduce((x,y) => x.id > y.id ? x : y).id + 1, createDate: currentDate, title:title, isActive: true});
     },
     deleteTask(state, id) {
         state.tasks = state.tasks.filter(x => x.id !== id);
