@@ -14,8 +14,7 @@
     </div>
   </div>
   <div class="controls">
-    <div class="control_edit" @click.stop.prevent>
-
+    <div class="control_edit" @click.stop.prevent @click="openModal(item)">
       <div class="svg_container">
         <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M13.474 3.40783L15.592 5.52483L13.474 3.40783ZM14.836 1.54283L9.109 7.26983C8.81309 7.56533 8.61128 7.94181 8.529 8.35183L8 10.9998L10.648 10.4698C11.058 10.3878 11.434 10.1868 11.73 9.89083L17.457 4.16383C17.6291 3.99173 17.7656 3.78742 17.8588 3.56256C17.9519 3.33771 17.9998 3.09671 17.9998 2.85333C17.9998 2.60994 17.9519 2.36895 17.8588 2.14409C17.7656 1.91923 17.6291 1.71492 17.457 1.54283C17.2849 1.37073 17.0806 1.23421 16.8557 1.14108C16.6309 1.04794 16.3899 1 16.1465 1C15.9031 1 15.6621 1.04794 15.4373 1.14108C15.2124 1.23421 15.0081 1.37073 14.836 1.54283V1.54283Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -58,12 +57,17 @@ export default {
     checkDate(date) {
       const arr = date.split(' ');
       const yesterday = new Date(new Date() - 24*3600*1000)
+
       if (arr[0] === new Date().toLocaleDateString()) {
         return `Today ${arr[1]}`
       } else if (arr[0] === yesterday.toLocaleDateString()) {
         return  `Yesterday ${arr[1]}`
       }
+
       return date;
+    },
+    openModal (item) {
+      this.$emit('openModal', item)
     }
   }
 }

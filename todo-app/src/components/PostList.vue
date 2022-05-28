@@ -1,5 +1,8 @@
 <template>
-  <ul class="post-list">
+  <ul class="post-list"
+      v-if="this.$store.state.tasks.length > 0"
+
+  >
     <transition-group name="list-complete">
       <post-item
         class="list-complete-item"
@@ -7,16 +10,44 @@
         :item="item"
         :index="index"
         v-for="(item, index) in this.$store.state.tasks"
+        @openModal="openModal"
       />
     </transition-group>
   </ul>
+  <div class="empty-list"
+  v-else
+  ><h4>Empty :(<br>Add a new task</h4></div>
+  <transition name="modal">
+  <modal-item-edit class="modal_edit"
+    v-if="mVisible"
+    :key="item.id"
+    :item="item"
+    @closeModal="closeModal"
+  />
+  </transition>
 </template>
 
 <script>
 import PostItem from "@/components/PostItem";
+import modalItemEdit from "@/components/modal-itemEdit";
 export default {
   name: "PostList",
-  components: {PostItem},
+  components: {PostItem, modalItemEdit},
+  data: () => {
+    return {
+      mVisible: false,
+      item: {}
+    }
+  },
+  methods: {
+    openModal (item) {
+      this.mVisible = true;
+      this.item = item;
+    },
+    closeModal () {
+      this.mVisible = false;
+    }
+  }
 }
 </script>
 
@@ -54,4 +85,19 @@ export default {
   transition: transform 0.5s ease;
 }
 
+.modal-enter-active, .modal-leave-active {
+  transition: opacity .3s;
+}
+.modal-enter, .modal-leave-to{
+  opacity: 0;
+}
+
+.empty-list h4{
+  margin-top: 50px;
+  text-align: center;
+  font-size: 26px;
+  color: #8D8E9B;
+  line-height: 32px;
+
+}
 </style>
