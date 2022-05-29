@@ -26,6 +26,7 @@ export default {
         this.$store.commit('addNewTask', title);
         this.$store.getters.turnActive;
         this.title = '';
+        this.$store.commit('initialiseStore');
       }
     }
   }

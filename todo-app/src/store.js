@@ -8,10 +8,17 @@ const store = createStore({
         {id: 2, createDate: '19.05.2022 15:04', title: 'Learn JS', isActive: true},
         {id: 3, createDate: '18.05.2022 15:04', title: 'Catch some birds for my birthday', isActive: true},
       ],
-
     }
   },
   mutations: {
+    initialiseStore(state) {
+      // Check if the ID exists
+      if(localStorage.getItem('store')) {
+        this.replaceState(
+          Object.assign(state, JSON.parse(localStorage.getItem('store')))
+        );
+      }
+    },
     addNewTask(state, title) {
       const currentDate = `${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString([], {
         hour: '2-digit',
@@ -39,7 +46,7 @@ const store = createStore({
     turnActive: state => {
       state.tasks.sort((x, y) => Number(y.isActive) - Number(x.isActive));
     }
-  }
+  },
 
 })
 

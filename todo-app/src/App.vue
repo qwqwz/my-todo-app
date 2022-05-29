@@ -12,7 +12,13 @@ import PostForm from "@/components/PostForm";
 import PostList from "@/components/PostList";
 
 export default {
-  components: {PostForm, PostList}
+  beforeCreate() {
+    this.$store.commit('initialiseStore');
+  },
+  components: {PostForm, PostList},
+  methods: {
+
+  },
 }
 </script>
 
