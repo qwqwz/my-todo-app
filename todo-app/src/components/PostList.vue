@@ -63,6 +63,7 @@ export default {
 }
 
 .list-complete-item {
+  max-width: 820px;
   transition: all .3s;
   display: flex;
 }

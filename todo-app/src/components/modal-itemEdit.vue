@@ -1,6 +1,7 @@
 <template>
 <div class="edit_wrap"
-     @click.self="closeModal()"
+     @mousedown="closing = $event.target === $el"
+     @mouseup.self="closing && closeModal()"
 >
   <div class="edit_wrap_body">
     <div class="edit_wrap_content">
@@ -11,7 +12,7 @@
           <path d="M16 16L7 7M16 7L11.5 11.5L7 16" stroke-width="2" stroke-linecap="round"/>
         </svg>
       </div>
-      <h3 class="edit_title">Edit title</h3>
+      <h3 class="edit_title">Edit task</h3>
       <input class="edit_input" type="text" placeholder="Buy milk for my brother"
       v-model="title"
       >
@@ -29,7 +30,8 @@ export default {
   name: "modal-itemEdit",
   data: () => {
     return {
-      title: ''
+      title: '',
+      closing: false
     }
   },
   props: {
